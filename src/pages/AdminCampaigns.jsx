@@ -57,7 +57,7 @@ function AdminCampaigns() {
 
   return (
     <AdminLayout>
-    <main className="campaigns-page">
+    <main className="campaigns-page admin-campaigns-wrapper">
       <section className="campaigns-header">
         <span className="hero-badge">🌿 Voluntariado</span>
         <h1>Campañas <span>activas</span></h1>

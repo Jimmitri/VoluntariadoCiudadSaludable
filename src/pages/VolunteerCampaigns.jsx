@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { auth, db } from "../firebase/config";
 import { useNavigate } from "react-router-dom";
 import VolunteerLayout from "../components/VolunteerLayout";
-import { addDoc, collection, query, where, getDocs, serverTimestamp, doc, getDoc } from "firebase/firestore";
+import { onSnapshot, collection, query, where, getDocs, serverTimestamp, doc, getDoc, runTransaction, } from "firebase/firestore";
 
 
 function VolunteerCampaigns() {
@@ -23,26 +23,30 @@ function VolunteerCampaigns() {
   const [sending, setSending] = useState(false);
 
   useEffect(() => {
-    const fetchCampaigns = async () => {
-      try {
-        const q = query(
-          collection(db, "campaigns"),
-          where("status", "==", "activa")
-        );
-        const snapshot = await getDocs(q);
+    const q = query(
+      collection(db, "campaigns"),
+      where("status", "==", "activa")
+    );
+
+    const unsubscribe = onSnapshot(
+      q,
+      (snapshot) => {
         const data = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
+
         setCampaigns(data);
-      } catch (err) {
+        setLoading(false);
+      },
+      (err) => {
         console.error("Error cargando campañas:", err);
         setError("No se pudieron cargar las campañas. Intenta de nuevo más tarde.");
-      } finally {
         setLoading(false);
       }
-    };
-    fetchCampaigns();
+    );
+
+    return () => unsubscribe();
   }, []);
 
   const filtered = campaigns.filter((camp) => {
@@ -122,25 +126,63 @@ function VolunteerCampaigns() {
 
       const userData = userSnap.data();
 
-      await addDoc(collection(db, "applications"), {
-        campaignId: selectedCampaign.id,
-        campaignName: selectedCampaign.nombre || "Campaña",
+      const duplicateQuery = query(
+        collection(db, "applications"),
+        where("campaignId", "==", selectedCampaign.id),
+        where("userId", "==", user.uid)
+      );
 
-        userId: user.uid,
-        userName: userData.nombre || "Voluntario",
-        userEmail: userData.email || userData.correo || user.email,
-        userPhone: userData.telefono || "",
+      const duplicateSnap = await getDocs(duplicateQuery);
 
-        motivation,
-        availability,
-        previousExperience: experience,
-        additionalComment: comment,
+      if (!duplicateSnap.empty) {
+        setApplyMessage("Ya postulaste a esta campaña.");
+        setSending(false);
+        return;
+      }
 
-        estado: "pendiente",
-        createdAt: serverTimestamp(),
+      const campaignRef = doc(db, "campaigns", selectedCampaign.id);
+
+      await runTransaction(db, async (transaction) => {
+        const campaignSnap = await transaction.get(campaignRef);
+
+        if (!campaignSnap.exists()) {
+          throw new Error("La campaña no existe.");
+        }
+
+        const campaignData = campaignSnap.data();
+        const currentVacantes = Number(campaignData.vacantes || 0);
+
+        if (currentVacantes <= 0) {
+          throw new Error("No hay vacantes disponibles.");
+        }
+
+        const applicationRef = doc(collection(db, "applications"));
+
+        transaction.set(applicationRef, {
+          campaignId: selectedCampaign.id,
+          campaignName: selectedCampaign.nombre || "Campaña",
+
+          userId: user.uid,
+          userName: userData.nombre || "Voluntario",
+          userEmail: userData.email || userData.correo || user.email,
+          userPhone: userData.telefono || "",
+
+          motivation,
+          availability,
+          previousExperience: experience,
+          additionalComment: comment,
+
+          estado: "pendiente",
+          createdAt: serverTimestamp(),
+        });
+
+        transaction.update(campaignRef, {
+          vacantes: currentVacantes - 1,
+        });
       });
 
       setApplyMessage("Postulación enviada correctamente.");
+
       setMotivation("");
       setAvailability("");
       setExperience("");
@@ -151,14 +193,14 @@ function VolunteerCampaigns() {
       }, 1500);
     } catch (error) {
       console.error("Error enviando postulación:", error);
-      setApplyMessage("No se pudo enviar la postulación.");
+      setApplyMessage(error.message || "No se pudo enviar la postulación.");
     } finally {
       setSending(false);
-  }
-};
+    }
+  };
   return (
     <VolunteerLayout>
-    <main className="campaigns-page">
+    <main className="campaigns-page volunteer-campaigns-wrapper">
       <section className="campaigns-header">
         <span className="hero-badge">🌿 Voluntariado</span>
         <h1>Campañas <span>activas</span></h1>

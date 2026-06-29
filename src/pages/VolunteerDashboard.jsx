@@ -1,7 +1,34 @@
 import VolunteerLayout from "../components/VolunteerLayout";
+import { collection, getDocs, query, where, limit } from "firebase/firestore";
+import { db } from "../firebase/config";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+
 
 function VolunteerDashboard() {
+    const [latestCampaigns, setLatestCampaigns] = useState([]);
+
+        useEffect(() => {
+        const loadCampaigns = async () => {
+            const q = query(
+            collection(db, "campaigns"),
+            where("status", "==", "activa"),
+            limit(3)
+            );
+
+            const snapshot = await getDocs(q);
+
+            const data = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+            }));
+
+            setLatestCampaigns(data);
+        };
+
+        loadCampaigns();
+    }, []);
+    
     return (
         <VolunteerLayout>
         <section className="dashboard-welcome">
@@ -68,12 +95,36 @@ function VolunteerDashboard() {
 
         <section className="dashboard-panel">
             <div className="panel-header">
-            <h2>Campañas disponibles</h2>
+                <h2>Campañas disponibles</h2>
+                <Link to="/volunteer/campaigns">Ver todas →</Link>
             </div>
 
-            <p className="empty-message">
-            Aún no hay campañas disponibles.
-            </p>
+            {latestCampaigns.length === 0 ? (
+                <p className="empty-message">
+                Aún no hay campañas disponibles.
+                </p>
+            ) : (
+                <div className="volunteer-campaign-preview-grid">
+                {latestCampaigns.map((campaign) => (
+                    <div className="volunteer-campaign-preview-card" key={campaign.id}>
+                    <img
+                        src={campaign.imagen || "https://via.placeholder.com/300x160?text=Campaña"}
+                        alt={campaign.nombre}
+                    />
+
+                    <div>
+                        <h3>{campaign.nombre}</h3>
+                        <p>📍 {campaign.ubicacion || "Ubicación no especificada"}</p>
+                        <p>📅 {campaign.fecha || "Sin fecha"}</p>
+
+                        <Link to="/volunteer/campaigns" className="preview-detail-link">
+                        Ver detalle →
+                        </Link>
+                    </div>
+                    </div>
+                ))}
+                </div>
+            )}
         </section>
         </VolunteerLayout>
     );

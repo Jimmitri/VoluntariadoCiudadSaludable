@@ -744,6 +744,25 @@ a {
   margin-bottom: 16px;
 }
 
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.panel-header a {
+  color: #2e7d32;
+  font-weight: 800;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.panel-header a:hover {
+  color: #1b5e20;
+  transform: translateX(3px);
+}
+
 .empty-message {
   color: #6a756d;
   background: #f4f8f4;
@@ -800,6 +819,54 @@ a {
 .menu-toggle,
 .close-sidebar {
   display: none;
+}
+.volunteer-campaign-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.volunteer-campaign-preview-card {
+  background: #f8fbf8;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid #edf3ee;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.04);
+}
+
+.volunteer-campaign-preview-card img {
+  width: 100%;
+  height: 145px;
+  object-fit: cover;
+}
+
+.volunteer-campaign-preview-card div {
+  padding: 16px;
+}
+
+.volunteer-campaign-preview-card h3 {
+  color: #073b20;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.volunteer-campaign-preview-card p {
+  color: #526058;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.preview-detail-link {
+  display: inline-block;
+  margin-top: 10px;
+  color: #2e7d32;
+  font-weight: 800;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.preview-detail-link:hover {
+  color: #1b5e20;
 }
 
 /* RESPONSIVE VOLUNTEER LAYOUT */
@@ -901,7 +968,11 @@ a {
   .dashboard-summary {
     grid-template-columns: 1fr;
   }
+    .volunteer-campaign-preview-grid {
+    grid-template-columns: 1fr;
+  }
 }
+
 
 /* ADMIN LAYOUT */
 .admin-layout {
@@ -1110,17 +1181,19 @@ a {
 .admin-campaign-list {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 18px;
 }
 
 .admin-list-item,
 .admin-campaign-item {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 18px;
   background: #f8fbf8;
-  padding: 14px;
-  border-radius: 12px;
+  border: 1px solid #edf3ee;
+  border-radius: 14px;
+  transition: all .25s ease;
 }
 
 .admin-list-item p {
@@ -1143,10 +1216,11 @@ a {
 }
 
 .admin-campaign-item img {
-  width: 100px;
-  height: 70px;
+  width: 90px;
+  height: 90px;
+  border-radius: 12px;
   object-fit: cover;
-  border-radius: 10px;
+  flex-shrink: 0;
 }
 
 .admin-campaign-item p {
@@ -1163,8 +1237,64 @@ a {
   font-weight: 800;
 }
 
+.admin-campaign-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(0,0,0,.06);
+}
+
+.admin-campaign-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
 .admin-menu-toggle {
   display: none;
+}
+
+.admin-campaign-info h4,
+.admin-campaign-info strong {
+  margin: 0;
+  color: #073b20;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.admin-campaign-date {
+  color: #6b7280;
+  font-size: 14px;
+  margin: 0;
+}
+
+.admin-campaign-status {
+  display: inline-block;
+  width: fit-content;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #dff7e3;
+  color: #238636;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.admin-campaign-description {
+  margin-top: 4px;
+  color: #526058;
+  font-size: 13px;
+  line-height: 1.45;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.admin-campaign-location {
+  margin-top: 4px;
+  color: #2e7d32;
+  font-size: 13px;
+  font-weight: 600;
 }
 
 /* ADMIN RESPONSIVE */
@@ -1975,4 +2105,127 @@ MODAL VOLUNTEER DETALLE
   .form-group.full {
     grid-column: auto;
   }
+}
+
+/* CREATE CAMPAIGN */
+.create-campaign-container {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 24px;
+}
+
+.create-campaign-form,
+.campaign-image-panel {
+  background: white;
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.create-campaign-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.create-campaign-form .full {
+  grid-column: 1 / span 2;
+}
+
+.campaign-image-panel h3 {
+  color: #073b20;
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.campaign-image-panel p {
+  color: #526058;
+  margin-bottom: 18px;
+}
+
+.campaign-image-preview {
+  width: 100%;
+  height: 300px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #f4f8f4;
+  border: 1.5px dashed #b7c9ba;
+  margin-bottom: 20px;
+}
+
+.campaign-image-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.campaign-preview-placeholder {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #2e7d32;
+  text-align: center;
+}
+
+.campaign-preview-placeholder span {
+  font-size: 58px;
+  margin-bottom: 10px;
+}
+
+.campaign-upload-btn {
+  display: inline-block;
+  padding: 13px 20px;
+  background: #2e7d32;
+  color: white;
+  border-radius: 10px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.campaign-upload-btn input {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .create-campaign-container {
+    grid-template-columns: 1fr;
+  }
+
+  .create-campaign-form {
+    grid-template-columns: 1fr;
+  }
+
+  .create-campaign-form .full {
+    grid-column: auto;
+  }
+
+  .campaign-image-preview {
+    height: 230px;
+  }
+}
+
+/*VOLUNTEER Y ADMIN CAMPAIGNS*/
+
+/* Ajuste para campañas dentro de layouts privados */
+.volunteer-campaigns-wrapper,
+.admin-campaigns-wrapper {
+  min-height: auto;
+  background: transparent;
+}
+
+.volunteer-campaigns-wrapper .campaigns-header,
+.admin-campaigns-wrapper .campaigns-header {
+  padding: 25px 28px 0 28px;
+}
+
+.volunteer-campaigns-wrapper .campaigns-search-bar,
+.admin-campaigns-wrapper .campaigns-search-bar {
+  padding: 28px 28px 0 28px;
+}
+
+.volunteer-campaigns-wrapper .campaigns-content,
+.admin-campaigns-wrapper .campaigns-content {
+  padding: 28px 28px 40px 28px;
 }

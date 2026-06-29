@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { collection, getDocs, query, where, orderBy, limit } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import { db } from "../firebase/config";
 import AdminLayout from "../components/AdminLayout";
@@ -135,23 +135,46 @@ function AdminDashboard() {
             </div>
 
             {recentCampaigns.length === 0 ? (
-                <p className="empty-message">Aún no hay campañas registradas.</p>
-            ) : (
+                <p className="empty-message">
+                    Aún no hay campañas registradas.
+                </p>
+                ) : (
                 <div className="admin-campaign-list">
-                {recentCampaigns.map((campaign) => (
+                    {recentCampaigns.map((campaign) => (
                     <div className="admin-campaign-item" key={campaign.id}>
-                    <img
-                        src={campaign.imagenUrl || "https://via.placeholder.com/120x80?text=Campaña"}
-                        alt={campaign.titulo}
-                    />
+                        <img
+                        src={
+                            campaign.imagen ||
+                            "https://via.placeholder.com/120x80?text=Campaña"
+                        }
+                        alt={campaign.nombre}
+                        />
 
-                    <div>
-                        <strong>{campaign.titulo}</strong>
-                        <p>{campaign.fecha || "Sin fecha"}</p>
-                        <span>{campaign.estado || "activa"}</span>
+                        <div className="admin-campaign-info">
+                        <strong>{campaign.nombre}</strong>
+
+                        <p className="admin-campaign-date">
+                            📅 {campaign.fecha || "Sin fecha"}
+                        </p>
+
+                        <span className="admin-campaign-status">
+                            {campaign.status || "Activa"}
+                        </span>
+
+                        <p className="admin-campaign-description">
+                            {campaign.descripcion
+                            ? campaign.descripcion.length > 95
+                                ? campaign.descripcion.substring(0, 95) + "..."
+                                : campaign.descripcion
+                            : "Sin descripción"}
+                        </p>
+
+                        <p className="admin-campaign-location">
+                            📍 {campaign.ubicacion || "Ubicación no especificada"}
+                        </p>
+                        </div>
                     </div>
-                    </div>
-                ))}
+                    ))}
                 </div>
             )}
             </div>

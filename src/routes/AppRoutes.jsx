@@ -5,11 +5,11 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Campaigns from "../pages/Campaigns";
-import ApplyCampaign from "../pages/ApplyCampaign";
 import AdminCampaigns from "../pages/AdminCampaigns";
 import VolunteerDashboard from "../pages/VolunteerDashboard";
 import AdminDashboard from "../pages/AdminDashboard";
 import VolunteerCampaigns from "../pages/VolunteerCampaigns";
+import AdminCreateCampaigns from "../pages/AdminCreateCampaigns";
 
 function PublicPage({ children }) {
     return (
@@ -27,7 +27,7 @@ function AppRoutes() {
         <Route path="/login" element={<PublicPage><Login /></PublicPage>} />
         <Route path="/register" element={<PublicPage><Register /></PublicPage>} />
         <Route path="/campaigns" element={<PublicPage><Campaigns /></PublicPage>} />
-        <Route path="/apply/:id" element={<ApplyCampaign />} />
+        <Route path="/admin/create-campaign" element={<AdminCreateCampaigns />} />
 
         <Route path="/volunteer" element={<VolunteerDashboard />} />
         <Route path="/admin" element={<AdminDashboard />} />
