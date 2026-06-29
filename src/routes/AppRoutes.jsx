@@ -5,7 +5,6 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Campaigns from "../pages/Campaigns";
-import CampaignDetail from "../pages/CampaignDetail";
 import ApplyCampaign from "../pages/ApplyCampaign";
 import AdminCampaigns from "../pages/AdminCampaigns";
 import VolunteerDashboard from "../pages/VolunteerDashboard";
@@ -28,7 +27,6 @@ function AppRoutes() {
         <Route path="/login" element={<PublicPage><Login /></PublicPage>} />
         <Route path="/register" element={<PublicPage><Register /></PublicPage>} />
         <Route path="/campaigns" element={<PublicPage><Campaigns /></PublicPage>} />
-        <Route path="/campaign/:id" element={<PublicPage><CampaignDetail /></PublicPage>} />
         <Route path="/apply/:id" element={<ApplyCampaign />} />
 
         <Route path="/volunteer" element={<VolunteerDashboard />} />

@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { collection, query, where, getDocs } from "firebase/firestore";
-import { Link } from "react-router-dom";
 import { db } from "../firebase/config";
+import { useNavigate } from "react-router-dom";
 
 function Campaigns() {
   const [campaigns, setCampaigns] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const [selectedCampaign, setSelectedCampaign] = useState(null);
 
   useEffect(() => {
     const fetchCampaigns = async () => {
@@ -55,6 +57,7 @@ function Campaigns() {
   };
 
   return (
+
     <main className="campaigns-page">
       <section className="campaigns-header">
         <span className="hero-badge">🌿 Voluntariado</span>
@@ -148,9 +151,12 @@ function Campaigns() {
                   </div>
 
                   <div className="campaign-card-footer">
-                    <Link to={`/campaign/${camp.id}`} className="campaign-detail-btn">
+                    <button
+                      className="campaign-detail-btn"
+                      onClick={() => setSelectedCampaign(camp)}
+                    >
                       Ver detalle →
-                    </Link>
+                    </button>
                   </div>
 
                 </article>
@@ -160,199 +166,58 @@ function Campaigns() {
         )}
       </section>
 
-      <style>{`
-        .campaigns-page {
-          min-height: calc(100vh - 72px);
-          background: linear-gradient(180deg, #f2f7f2 0%, #ffffff 100%);
-        }
-        .campaigns-header {
-          padding: 60px 80px 0;
-          display: flex;
-          flex-direction: column;
-          gap: 14px;
-        }
-        .campaigns-header h1 {
-          font-size: 44px;
-          font-weight: 900;
-          color: #102015;
-          letter-spacing: -1px;
-          line-height: 1.1;
-          margin: 0;
-        }
-        .campaigns-header h1 span { color: #2e7d32; }
-        .campaigns-header p {
-          color: #26352b;
-          font-size: 17px;
-          line-height: 1.6;
-          max-width: 560px;
-          margin: 0;
-        }
-        .campaigns-search-bar { padding: 32px 80px 0; }
-        .search-input-wrapper {
-          position: relative;
-          max-width: 520px;
-          display: flex;
-          align-items: center;
-        }
-        .search-icon {
-          position: absolute;
-          left: 16px;
-          font-size: 16px;
-          pointer-events: none;
-        }
-        .search-input {
-          width: 100%;
-          padding: 14px 44px 14px 46px;
-          border: 1.5px solid #d4ded6;
-          border-radius: 12px;
-          font-size: 15px;
-          outline: none;
-          background: white;
-          color: #102015;
-          transition: border-color 0.2s;
-        }
-        .search-input:focus {
-          border-color: #2e7d32;
-          box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
-        }
-        .search-clear {
-          position: absolute;
-          right: 14px;
-          background: #e8f5e9;
-          border: none;
-          border-radius: 50%;
-          width: 24px;
-          height: 24px;
-          font-size: 12px;
-          font-weight: 700;
-          color: #2e7d32;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-        .campaigns-content { padding: 28px 80px 60px; }
-        .campaigns-count {
-          font-size: 14px;
-          font-weight: 700;
-          color: #526058;
-          margin-bottom: 20px;
-        }
-        .campaigns-feedback { padding: 40px 0; }
-        .loading-message, .empty-message {
-          color: #526058;
-          background: #f4f8f4;
-          padding: 18px 22px;
-          border-radius: 12px;
-          font-size: 15px;
-        }
-        .campaigns-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
-          gap: 22px;
-        }
-        .campaign-card {
-          background: white;
-          border-radius: 18px;
-          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          transition: transform 0.18s ease, box-shadow 0.18s ease;
-          overflow: hidden;
-          border: 1px solid #eef5ef;
-        }
-        .campaign-card:hover {
-          transform: translateY(-4px);
-          box-shadow: 0 16px 36px rgba(0, 0, 0, 0.1);
-        }
-        .campaign-card-img {
-          width: 100%;
-          height: 160px;
-          overflow: hidden;
-        }
-        .campaign-card-img img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          transition: transform 0.3s ease;
-        }
-        .campaign-card:hover .campaign-card-img img {
-          transform: scale(1.05);
-        }
-        .campaign-card-img--placeholder {
-          background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 48px;
-        }
-        .campaign-card-body {
-          padding: 22px 26px 18px;
-          display: flex;
-          flex-direction: column;
-          gap: 12px;
-          flex: 1;
-        }
-        .campaign-status-badge {
-          width: fit-content;
-          background: #e8f5e9;
-          color: #2e7d32;
-          padding: 5px 12px;
-          border-radius: 20px;
-          font-size: 12px;
-          font-weight: 800;
-        }
-        .campaign-card-title {
-          font-size: 19px;
-          font-weight: 900;
-          color: #073b20;
-          line-height: 1.25;
-          margin: 0;
-        }
-        .campaign-card-meta {
-          display: flex;
-          flex-direction: column;
-          gap: 7px;
-        }
-        .meta-item {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          font-size: 14px;
-          color: #3f4f43;
-        }
-        .meta-icon { font-size: 15px; flex-shrink: 0; }
-        .campaign-card-desc {
-          font-size: 14px;
-          color: #526058;
-          line-height: 1.55;
-          margin: 0;
-        }
-        .campaign-card-footer { padding: 0 26px 22px; }
-        .campaign-detail-btn {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          padding: 12px 22px;
-          background: #2e7d32;
-          color: white;
-          border-radius: 10px;
-          font-size: 14px;
-          font-weight: 800;
-          transition: background 0.18s ease;
-        }
-        .campaign-detail-btn:hover { background: #256b29; }
-        @media (max-width: 1000px) {
-          .campaigns-header,
-          .campaigns-search-bar,
-          .campaigns-content { padding-left: 24px; padding-right: 24px; }
-          .campaigns-header { padding-top: 40px; }
-          .campaigns-header h1 { font-size: 32px; }
-          .search-input-wrapper { max-width: 100%; }
-          .campaigns-grid { grid-template-columns: 1fr; }
-        }
-      `}</style>
+      {selectedCampaign && (
+        <div className="modal-overlay" onClick={() => setSelectedCampaign(null)}>
+          <div className="campaign-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setSelectedCampaign(null)}>
+              ✕
+            </button>
+
+            {selectedCampaign.imagen ? (
+              <img
+                src={selectedCampaign.imagen}
+                alt={selectedCampaign.nombre}
+                className="modal-image"
+              />
+            ) : (
+              <div className="modal-image modal-placeholder">🌿</div>
+            )}
+
+            <div className="modal-content">
+              <span className="campaign-status-badge">✅ Activa</span>
+
+              <h2>{selectedCampaign.nombre}</h2>
+
+              <div className="modal-info">
+                <p>📅 {formatDate(selectedCampaign.fecha)}</p>
+                <p>📍 {selectedCampaign.ubicacion || "Ubicación no especificada"}</p>
+                <p>
+                  👥 {selectedCampaign.vacantes ?? "—"} vacantes disponibles
+                </p>
+              </div>
+
+              <h3>Sobre esta campaña</h3>
+              <p>
+                {selectedCampaign.descripcion ||
+                  "No se ha proporcionado una descripción para esta campaña."}
+              </p>
+
+              <h3>Requisitos</h3>
+              <p>
+                {selectedCampaign.requisitos ||
+                  "No hay requisitos específicos para esta campaña."}
+              </p>
+
+              <button
+                className="postular-link"
+                onClick={() => navigate(`/login?redirect=/apply/${selectedCampaign.id}`)}
+              >
+                Postular ahora →
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
