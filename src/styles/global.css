@@ -1692,3 +1692,287 @@ MODAL VOLUNTEER DETALLE
   opacity: 0.7;
   cursor: not-allowed;
 }
+
+/* REGISTER */
+.register-page {
+  min-height: calc(100vh - 72px);
+  background: #f4f8f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 35px 24px;
+}
+
+.register-container {
+  width: 100%;
+  max-width: 1180px;
+  background: white;
+  border-radius: 24px;
+  display: grid;
+  grid-template-columns: 38% 62%;
+  overflow: hidden;
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.08);
+}
+
+.register-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.register-card {
+  padding: 42px 52px;
+}
+
+.register-card h1 {
+  color: #073b20;
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+
+.register-card p {
+  color: #526058;
+  margin-bottom: 24px;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.register-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.form-group.full {
+  grid-column: 1 / span 2;
+}
+
+.form-group label {
+  font-weight: 800;
+  color: #102015;
+  font-size: 14px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 13px;
+  border: 1.5px solid #d4ded6;
+  border-radius: 9px;
+  outline: none;
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.form-group textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #2e7d32;
+  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+}
+
+.terms-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #26352b;
+  font-size: 14px;
+}
+
+.terms-row input {
+  width: 18px;
+  height: 18px;
+  accent-color: #2e7d32;
+}
+
+.terms-link {
+  background: transparent;
+  border: none;
+  color: #2e7d32;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.terms-link:hover {
+  text-decoration: underline;
+}
+
+.register-btn {
+  padding: 14px;
+  background: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.register-btn:hover {
+  background: #256b29;
+}
+
+.register-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.register-message {
+  background: #f4f8f4;
+  color: #073b20;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+/* TERMS MODAL */
+.terms-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.terms-modal {
+  width: 100%;
+  max-width: 640px;
+  max-height: 86vh;
+  overflow-y: auto;
+  background: white;
+  border-radius: 20px;
+  padding: 34px;
+  position: relative;
+}
+
+.terms-modal h2 {
+  color: #073b20;
+  margin-bottom: 16px;
+}
+
+.terms-modal h3 {
+  color: #073b20;
+  margin-top: 20px;
+  margin-bottom: 8px;
+}
+
+.terms-modal p {
+  color: #526058;
+  line-height: 1.6;
+}
+
+.terms-close-btn {
+  margin-top: 24px;
+  padding: 12px 24px;
+  background: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 9px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.photo-upload-box {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 18px;
+  border: 1.5px dashed #b7c9ba;
+  border-radius: 14px;
+  background: #f8fbf8;
+}
+
+.photo-preview {
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+  background: #e8f5e9;
+  color: #073b20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.photo-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-upload-info p {
+  margin: 0 0 4px;
+  color: #073b20;
+  font-weight: 800;
+}
+
+.photo-upload-info small {
+  display: block;
+  color: #526058;
+  margin-bottom: 12px;
+}
+
+.photo-upload-btn {
+  display: inline-block;
+  width: fit-content;
+  padding: 10px 16px;
+  background: #2e7d32;
+  color: white !important;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.photo-upload-btn input {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .photo-upload-box {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 900px) {
+  .register-container {
+    grid-template-columns: 1fr;
+    max-width: 520px;
+  }
+
+  .register-image {
+    height: 230px;
+  }
+
+  .register-card {
+    padding: 32px 24px;
+  }
+
+  .register-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-group.full {
+    grid-column: auto;
+  }
+}
