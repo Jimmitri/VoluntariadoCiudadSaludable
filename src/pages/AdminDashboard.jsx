@@ -41,7 +41,7 @@ function AdminDashboard() {
             campaigns: campaigns.length,
             pendingApplications: applications.filter((app) => app.estado === "pendiente").length,
             volunteers: users.filter((user) => user.rol === "voluntario").length,
-            activeCampaigns: campaigns.filter((camp) => camp.estado === "activa").length,
+            activeCampaigns: campaigns.filter((camp) => camp.status === "activa").length,
             });
 
             setRecentCampaigns(campaigns.slice(0, 3));

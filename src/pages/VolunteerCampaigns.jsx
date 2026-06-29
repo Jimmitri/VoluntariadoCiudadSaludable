@@ -144,7 +144,7 @@ function VolunteerCampaigns() {
 
       await runTransaction(db, async (transaction) => {
         const campaignSnap = await transaction.get(campaignRef);
-
+      
         if (!campaignSnap.exists()) {
           throw new Error("La campaña no existe.");
         }
@@ -180,6 +180,11 @@ function VolunteerCampaigns() {
           vacantes: currentVacantes - 1,
         });
       });
+
+      setSelectedCampaign((prev) => ({
+        ...prev,
+        vacantes: Number(prev.vacantes || 0) - 1,
+      }));
 
       setApplyMessage("Postulación enviada correctamente.");
 
