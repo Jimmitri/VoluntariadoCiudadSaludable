@@ -114,14 +114,14 @@ function AdminDashboard() {
                 <div className="admin-list">
                 {recentApplications.map((app) => (
                     <div className="admin-list-item" key={app.id}>
-                    <div>
-                        <strong>{app.userName || app.userEmail || "Voluntario"}</strong>
-                        <p>{app.campaignTitle || "Campaña"}</p>
-                    </div>
+                        <div>
+                            <strong>{app.userName || app.userEmail || "Voluntario"}</strong>
+                            <p>{app.campaignName|| "Campaña"}</p>
+                        </div>
 
-                    <span className="status-badge">
-                        {app.estado || "pendiente"}
-                    </span>
+                        <span className={`application-status ${app.estado || "pendiente"}`}>
+                            {app.estado || "Pendiente"}
+                        </span>
                     </div>
                 ))}
                 </div>

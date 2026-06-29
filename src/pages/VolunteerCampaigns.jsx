@@ -394,8 +394,8 @@ function VolunteerCampaigns() {
                     required
                   >
                     <option value="">Selecciona una opción</option>
-                    <option value="Disponible">Confirmo que puedo asistir</option>
-                    <option value="Pendiente">Necesito confirmar mi disponibilidad</option>
+                    <option value="Confirmo que puedo asistir">Confirmo que puedo asistir</option>
+                    <option value="Necesito confirmar mi disponibilidad">Necesito confirmar mi disponibilidad</option>
                   </select>
 
                   <label>Experiencia previa</label>

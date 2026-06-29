@@ -2285,3 +2285,393 @@ MODAL VOLUNTEER DETALLE
 .admin-campaigns-wrapper .campaigns-content {
   padding: 28px 28px 40px 28px;
 }
+
+/* VOLUNTEER APPLICATIONS */
+.applications-page-panel {
+  background: white;
+  padding: 28px;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+
+.applications-filters {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.applications-filters button {
+  border: none;
+  background: #f4f8f4;
+  color: #26352b;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-weight: 800;
+  cursor: pointer;
+  text-transform: capitalize;
+}
+
+.applications-filters button.active {
+  background: #2e7d32;
+  color: white;
+}
+
+.applications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.application-card {
+  background: #f8fbf8;
+  border: 1px solid #edf3ee;
+  border-radius: 14px;
+  padding: 22px;
+  display: grid;
+  grid-template-columns: 1fr 210px;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.application-main-info h3 {
+  color: #073b20;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.application-main-info p {
+  color: #526058;
+  font-size: 14px;
+  margin-bottom: 7px;
+  line-height: 1.5;
+}
+
+.application-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.application-status {
+  display: inline-block;
+  padding: 7px 13px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.application-status.pendiente {
+  background: #fff8e1;
+  color: #b26a00;
+}
+
+.application-status.aceptada {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.application-status.rechazada {
+  background: #ffe6e6;
+  color: #b00020;
+}
+
+.application-status.completada {
+  background: #eef5ff;
+  color: #2563eb;
+}
+
+.rejection-box {
+  width: 100%;
+  background: #fff7f7;
+  border-left: 4px solid #d32f2f;
+  border-radius: 10px;
+  padding: 12px;
+  text-align: left;
+}
+
+.rejection-box strong {
+  display: block;
+  margin-bottom: 6px;
+  color: #102015;
+  font-size: 13px;
+}
+
+.rejection-box p {
+  color: #526058;
+  font-size: 13px;
+  line-height: 1.4;
+  margin: 0;
+}
+
+@media (max-width: 700px) {
+  .applications-page-panel {
+    padding: 18px;
+  }
+
+  .application-card {
+    grid-template-columns: 1fr;
+    padding: 18px;
+    gap: 14px;
+  }
+
+  .application-right {
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .rejection-box {
+    width: 100%;
+  }
+}
+
+/* ADMIN APPLICATIONS */
+.admin-applications-panel {
+  background: white;
+  padding: 28px;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+
+.admin-applications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.admin-application-card {
+  background: #f8fbf8;
+  border: 1px solid #edf3ee;
+  border-radius: 16px;
+  padding: 22px;
+  display: grid;
+  grid-template-columns: 1fr 180px;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.admin-application-info h3 {
+  color: #073b20;
+  font-size: 21px;
+  margin-bottom: 14px;
+}
+
+.admin-application-info p {
+  color: #526058;
+  font-size: 14px;
+  line-height: 1.55;
+  margin-bottom: 8px;
+}
+
+.admin-application-info strong {
+  color: #102015;
+}
+
+.admin-application-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.approve-btn,
+.reject-btn {
+  border: none;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.approve-btn {
+  background: #2e7d32;
+  color: white;
+}
+
+.approve-btn:hover {
+  background: #256b29;
+}
+
+.reject-btn {
+  background: #ffe6e6;
+  color: #b00020;
+}
+
+.reject-btn:hover {
+  background: #ffd1d1;
+}
+
+.admin-action-message {
+  background: #f4f8f4;
+  color: #073b20;
+  padding: 14px;
+  border-radius: 10px;
+  font-weight: 800;
+  margin-bottom: 18px;
+}
+
+.reject-modal {
+  width: 100%;
+  max-width: 520px;
+  background: white;
+  border-radius: 18px;
+  padding: 30px;
+}
+
+.reject-modal h2 {
+  color: #073b20;
+  margin-bottom: 8px;
+}
+
+.reject-modal p {
+  color: #526058;
+  margin-bottom: 20px;
+}
+
+.reject-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.reject-options label {
+  background: #f8fbf8;
+  padding: 13px;
+  border-radius: 10px;
+  color: #26352b;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.reject-options input {
+  margin-right: 10px;
+  accent-color: #2e7d32;
+}
+
+.reject-textarea {
+  width: 100%;
+  min-height: 90px;
+  margin-top: 16px;
+  padding: 13px;
+  border: 1.5px solid #d4ded6;
+  border-radius: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  resize: vertical;
+}
+
+.reject-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.cancel-btn {
+  border: none;
+  background: #f4f8f4;
+  color: #26352b;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+@media (max-width: 800px) {
+  .admin-application-card {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* EDIT CAMPAIGN MODAL */
+.edit-campaign-modal {
+  width: 92%;
+  max-width: 1050px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: white;
+  border-radius: 22px;
+  position: relative;
+}
+
+.edit-campaign-layout {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 0;
+}
+
+.edit-campaign-image-panel {
+  background: #f4f8f4;
+  padding: 34px;
+}
+
+.edit-campaign-image-panel h3 {
+  color: #073b20;
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.edit-campaign-image-panel p {
+  color: #526058;
+  margin-bottom: 18px;
+}
+
+.edit-campaign-preview {
+  width: 100%;
+  height: 340px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: white;
+  border: 1.5px dashed #b7c9ba;
+  margin-bottom: 20px;
+}
+
+.edit-campaign-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.edit-campaign-form {
+  padding: 34px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 18px;
+}
+
+.edit-campaign-form h2 {
+  grid-column: 1 / span 2;
+  color: #073b20;
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.edit-campaign-form .full {
+  grid-column: 1 / span 2;
+}
+
+.edit-campaign-form textarea {
+  min-height: 90px;
+}
+
+@media (max-width: 850px) {
+  .edit-campaign-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .edit-campaign-form {
+    grid-template-columns: 1fr;
+  }
+
+  .edit-campaign-form h2,
+  .edit-campaign-form .full {
+    grid-column: auto;
+  }
+
+  .edit-campaign-preview {
+    height: 240px;
+  }
+}
