@@ -2407,6 +2407,122 @@ MODAL VOLUNTEER DETALLE
   margin: 0;
 }
 
+.clickable-application-card {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.clickable-application-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+.volunteer-application-modal {
+  width: 92%;
+  max-width: 760px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: white;
+  border-radius: 20px;
+  padding: 32px;
+  position: relative;
+}
+
+.volunteer-application-modal h2 {
+  color: #073b20;
+  margin-bottom: 14px;
+}
+
+.participation-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.participation-detail-grid h3 {
+  color: #073b20;
+  margin-bottom: 12px;
+}
+
+.participation-detail-grid p {
+  color: #526058;
+  font-size: 14px;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.team-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.team-member {
+  background: #f8fbf8;
+  border: 1px solid #edf3ee;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.team-member strong {
+  color: #073b20;
+}
+
+.team-member p {
+  margin: 4px 0;
+  font-size: 13px;
+}
+
+.team-member span {
+  color: #526058;
+  font-size: 13px;
+}
+
+.empty-small {
+  background: #f4f8f4;
+  padding: 12px;
+  border-radius: 10px;
+  color: #526058;
+}
+
+.application-modal-image {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+  border-radius: 16px;
+  margin-bottom: 18px;
+}
+
+.application-campaign-info {
+  background: #f8fbf8;
+  border: 1px solid #edf3ee;
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 18px;
+}
+
+.application-campaign-info p {
+  color: #526058;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.application-description-box {
+  margin-bottom: 20px;
+}
+
+.application-description-box h3 {
+  color: #073b20;
+  margin-bottom: 8px;
+}
+
+.application-description-box p {
+  color: #526058;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
 @media (max-width: 700px) {
   .applications-page-panel {
     padding: 18px;
@@ -2425,6 +2541,13 @@ MODAL VOLUNTEER DETALLE
 
   .rejection-box {
     width: 100%;
+  }
+  .participation-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .volunteer-application-modal {
+    padding: 24px;
   }
 }
 
@@ -2673,5 +2796,193 @@ MODAL VOLUNTEER DETALLE
 
   .edit-campaign-preview {
     height: 240px;
+  }
+}
+
+/* ADMIN PARTICIPANTS */
+.participants-campaigns-panel,
+.participants-panel {
+  background: white;
+  padding: 28px;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+
+.participants-campaigns-panel h2,
+.participants-panel h2 {
+  color: #073b20;
+  margin-bottom: 18px;
+}
+
+.participants-campaigns-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.participant-campaign-card {
+  background: #f8fbf8;
+  border: 1px solid #edf3ee;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.participant-campaign-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.participant-campaign-card div {
+  padding: 18px;
+}
+
+.participant-campaign-card h3 {
+  color: #073b20;
+  margin: 10px 0;
+}
+
+.participant-campaign-card p {
+  color: #526058;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.participants-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.participants-panel-header p {
+  color: #526058;
+}
+
+.participants-table {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.participant-row {
+  display: grid;
+  grid-template-columns: 1.1fr 150px 180px 180px 1.2fr 160px;
+  gap: 14px;
+  align-items: flex-start;
+  background: #f8fbf8;
+  border: 1px solid #edf3ee;
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.participant-info h3 {
+  color: #073b20;
+  margin-bottom: 6px;
+}
+
+.participant-info p {
+  color: #526058;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.participant-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.participant-controls label {
+  color: #102015;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.participant-controls input,
+.participant-controls select,
+.participant-controls textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1.5px solid #d4ded6;
+  border-radius: 9px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  outline: none;
+}
+
+.participant-controls textarea {
+  min-height: 72px;
+  resize: vertical;
+}
+
+.participant-attendance {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.participant-status-container{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100%;
+    min-height:100px;
+}
+
+.participant-status-container .application-status{
+    font-size:13px;
+    padding:8px 18px;
+}
+/* SOLO MÓVIL - PARTICIPANTES COMO ACORDEÓN */
+.mobile-expand-hint {
+  display: none !important;
+}
+
+.participant-mobile-attendance {
+  display: contents;
+}
+
+.participant-extra-fields {
+  display: contents;
+}
+
+@media (max-width: 700px) {
+  .participants-campaigns-grid,
+  .participant-row {
+    grid-template-columns: 1fr !important;
+  }
+
+  .participant-toggle {
+    cursor: pointer;
+  }
+
+  .participant-mobile-attendance {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .participant-extra-fields {
+    display: none !important;
+  }
+
+  .participant-extra-fields.open {
+    display: flex !important;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 8px;
+  }
+
+  .participant-attendance {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .participant-status-container {
+    min-height: auto;
+    justify-content: center;
+    align-items: center;
   }
 }

@@ -12,6 +12,7 @@ import VolunteerCampaigns from "../pages/VolunteerCampaigns";
 import AdminCreateCampaigns from "../pages/AdminCreateCampaigns";
 import VolunteerMyApplications from "../pages/VolunteerMyApplications";
 import AdminApplications from "../pages/AdminApplications";
+import AdminParticipants from "../pages/AdminParticipants";
 
 function PublicPage({ children }) {
     return (
@@ -38,6 +39,7 @@ function AppRoutes() {
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/my-applications" element={<VolunteerMyApplications />} />
         <Route path="/admin/applications" element={<AdminApplications />} />
+        <Route path="/admin/participants" element={<AdminParticipants />} />
         </Routes>
     );
 }

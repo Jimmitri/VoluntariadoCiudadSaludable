@@ -161,6 +161,10 @@ function VolunteerCampaigns() {
         transaction.set(applicationRef, {
           campaignId: selectedCampaign.id,
           campaignName: selectedCampaign.nombre || "Campaña",
+          campaignImage: selectedCampaign.imagen || "",
+          campaignDate: selectedCampaign.fecha || "",
+          campaignLocation: selectedCampaign.ubicacion || "",
+          campaignDescription: selectedCampaign.descripcion || "",
 
           userId: user.uid,
           userName: userData.nombre || "Voluntario",
@@ -173,6 +177,13 @@ function VolunteerCampaigns() {
           additionalComment: comment,
 
           estado: "pendiente",
+          
+          participationRole: "",
+          leaderId: "",
+          leaderName: "",
+          groupName: "",
+          task: "",
+
           createdAt: serverTimestamp(),
         });
 
