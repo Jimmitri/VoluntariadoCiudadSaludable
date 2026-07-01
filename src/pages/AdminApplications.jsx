@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { collection, query, where, onSnapshot, doc, updateDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase/config";
 import AdminLayout from "../components/AdminLayout";
+import { sendApplicationEmail } from "../services/emailServices";
 
 function AdminApplications() {
     const [applications, setApplications] = useState([]);
@@ -39,23 +40,40 @@ function AdminApplications() {
         return () => unsubscribe();
     }, []);
 
-    const updateApplicationStatus = async (applicationId, newStatus) => {
+    const updateApplicationStatus = async (application, newStatus) => {
         try {
-        await updateDoc(doc(db, "applications", applicationId), {
+            await updateDoc(doc(db, "applications", application.id), {
             estado: newStatus,
+            participationRole: "integrante",
+            leaderId: "",
+            leaderName: "",
+            groupName: "",
+            task: "",
+            attendance: "",
+
+            reminderSent: false,
+            reminderSentAt: null,
+            
             reviewedAt: serverTimestamp(),
-        });
+            });
 
-        setMessage(
-            newStatus === "aceptada"
-            ? "Postulación aprobada correctamente."
-            : "Postulación rechazada correctamente."
-        );
+            await sendApplicationEmail({
+                toEmail: application.userEmail,
+                toName: application.userName,
 
-        setTimeout(() => setMessage(""), 2500);
+                campaignName: application.campaignName,
+                campaignDate: application.campaignDate,
+                campaignLocation: application.campaignLocation,
+                campaignDescription: application.campaignDescription,
+
+                applicationStatus: "APROBADA",
+            });
+
+            setMessage("Postulación aprobada correctamente y correo enviado.");
+            setTimeout(() => setMessage(""), 2500);
         } catch (error) {
-        console.error("Error actualizando postulación:", error);
-        setMessage("No se pudo actualizar la postulación.");
+            console.error("Error aprobando postulación:", error);
+            setMessage("La postulación se actualizó, pero hubo un problema con el correo.");
         }
     };
 
@@ -74,32 +92,46 @@ function AdminApplications() {
         };
 
         const confirmRejectApplication = async () => {
-        if (!selectedApplication) return;
+            if (!selectedApplication) return;
 
-        if (!rejectReason) {
-            setMessage("Selecciona un motivo de rechazo.");
-            return;
-        }
+            if (!rejectReason) {
+                setMessage("Selecciona un motivo de rechazo.");
+                return;
+            }
 
-        if (rejectReason === "Otro motivo" && !customReason.trim()) {
-            setMessage("Escribe el motivo del rechazo.");
-            return;
-        }
+            if (rejectReason === "Otro motivo" && !customReason.trim()) {
+                setMessage("Escribe el motivo del rechazo.");
+                return;
+            }
 
-        const finalReason =
-            rejectReason === "Otro motivo" ? customReason.trim() : rejectReason;
+            const finalReason =
+                rejectReason === "Otro motivo" ? customReason.trim() : rejectReason;
 
-        await updateDoc(doc(db, "applications", selectedApplication.id), {
-            estado: "rechazada",
-            rejectionReason: finalReason,
-            reviewedAt: serverTimestamp(),
-        });
+            await updateDoc(doc(db, "applications", selectedApplication.id), {
+                estado: "rechazada",
+                rejectionReason: finalReason,
+                reviewedAt: serverTimestamp(),
+            });
 
-        setMessage("Postulación rechazada correctamente.");
-        closeRejectModal();
+            await sendApplicationEmail({
+                toEmail: selectedApplication.userEmail,
+                toName: selectedApplication.userName,
 
-        setTimeout(() => setMessage(""), 2500);
-    };
+                campaignName: selectedApplication.campaignName,
+                campaignDate: selectedApplication.campaignDate,
+                campaignLocation: selectedApplication.campaignLocation,
+                campaignDescription: selectedApplication.campaignDescription,
+
+                applicationStatus: "RECHAZADA",
+
+                rejectionReason: finalReason,
+            });
+
+            setMessage("Postulación rechazada correctamente y correo enviado.");
+            closeRejectModal();
+
+            setTimeout(() => setMessage(""), 2500);
+        };
 
     return (
         <AdminLayout>
@@ -178,7 +210,7 @@ function AdminApplications() {
                     <button
                         className="approve-btn"
                         onClick={() =>
-                        updateApplicationStatus(app.id, "aceptada")
+                        updateApplicationStatus(app, "aceptada")
                         }
                     >
                         Aprobar

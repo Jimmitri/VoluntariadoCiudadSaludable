@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { collection, getDocs, query, updateDoc, where, doc, serverTimestamp, } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { collection, getDocs, query, updateDoc, doc, serverTimestamp, deleteDoc } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
 
 import { db, storage } from "../firebase/config";
 import AdminLayout from "../components/AdminLayout";
@@ -26,12 +26,16 @@ function AdminCampaigns() {
   const [editLoading, setEditLoading] = useState(false);
   const [editMessage, setEditMessage] = useState("");
 
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [campaignToDelete, setCampaignToDelete] = useState(null);
+  const [deleteLoading, setDeleteLoading] = useState(false);
+  const [deleteMessage, setDeleteMessage] = useState("");
+
   useEffect(() => {
     const fetchCampaigns = async () => {
       try {
         const q = query(
           collection(db, "campaigns"),
-          where("status", "==", "activa")
         );
 
         const snapshot = await getDocs(q);
@@ -175,6 +179,53 @@ function AdminCampaigns() {
     }
   };
 
+  const openDeleteModal = (campaign) => {
+    setCampaignToDelete(campaign);
+    setDeleteMessage("");
+    setDeleteModalOpen(true);
+  };
+
+  const closeDeleteModal = () => {
+    setDeleteModalOpen(false);
+    setCampaignToDelete(null);
+    setDeleteMessage("");
+  };
+
+  const handleDeleteCampaign = async () => {
+    if (!campaignToDelete) return;
+
+    setDeleteLoading(true);
+    setDeleteMessage("");
+
+    try {
+      if (campaignToDelete.imagen) {
+        try {
+          const imageRef = ref(storage, campaignToDelete.imagen);
+          await deleteObject(imageRef);
+        } catch (imageError) {
+          console.warn("No se pudo eliminar la imagen:", imageError);
+        }
+      }
+
+      await deleteDoc(doc(db, "campaigns", campaignToDelete.id));
+
+      setCampaigns((prev) =>
+        prev.filter((campaign) => campaign.id !== campaignToDelete.id)
+      );
+
+      setDeleteMessage("Campaña eliminada correctamente.");
+
+      setTimeout(() => {
+        closeDeleteModal();
+      }, 1200);
+    } catch (error) {
+      console.error("Error eliminando campaña:", error);
+      setDeleteMessage("No se pudo eliminar la campaña.");
+    } finally {
+      setDeleteLoading(false);
+    }
+  };
+
   return (
     <AdminLayout>
       <main className="campaigns-page admin-campaigns-wrapper">
@@ -256,8 +307,8 @@ function AdminCampaigns() {
                     )}
 
                     <div className="campaign-card-body">
-                      <span className="campaign-status-badge">
-                        ✅ {camp.status || "activa"}
+                      <span className={`campaign-status-badge ${camp.status === "inactiva" ? "inactive" : "active"}`}>
+                        {camp.status === "inactiva" ? "⛔ Inactiva" : "✅ Activa"}
                       </span>
 
                       <h2 className="campaign-card-title">{camp.nombre}</h2>
@@ -298,6 +349,12 @@ function AdminCampaigns() {
                         onClick={() => openEditModal(camp)}
                       >
                         Editar campaña →
+                      </button>
+                      <button
+                        className="campaign-delete-btn"
+                        onClick={() => openDeleteModal(camp)}
+                      >
+                        Eliminar campaña
                       </button>
                     </div>
                   </article>
@@ -432,6 +489,46 @@ function AdminCampaigns() {
                     {editLoading ? "Guardando cambios..." : "Guardar cambios"}
                   </button>
                 </form>
+              </div>
+            </div>
+          </div>
+        )}
+        {deleteModalOpen && campaignToDelete && (
+          <div className="modal-overlay" onClick={closeDeleteModal}>
+            <div className="delete-campaign-modal" onClick={(e) => e.stopPropagation()}>
+              <button className="modal-close" onClick={closeDeleteModal}>
+                ✕
+              </button>
+
+              <h2>Eliminar campaña</h2>
+
+              <p>
+                Estás a punto de eliminar la campaña:
+              </p>
+
+              <strong>{campaignToDelete.nombre}</strong>
+
+              <div className="delete-warning-box">
+                Esta acción eliminará la información de la campaña y ya no será visible
+                para los administradores ni voluntarios. Esta acción no se puede deshacer.
+              </div>
+
+              {deleteMessage && (
+                <p className="admin-action-message">{deleteMessage}</p>
+              )}
+
+              <div className="delete-modal-actions">
+                <button className="cancel-btn" onClick={closeDeleteModal}>
+                  Cancelar
+                </button>
+
+                <button
+                  className="confirm-delete-btn"
+                  onClick={handleDeleteCampaign}
+                  disabled={deleteLoading}
+                >
+                  {deleteLoading ? "Eliminando..." : "Eliminar campaña"}
+                </button>
               </div>
             </div>
           </div>

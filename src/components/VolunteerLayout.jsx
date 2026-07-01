@@ -54,8 +54,8 @@ function VolunteerLayout({ children }) {
 
             <div className="user-menu">
             <button className="user-button" onClick={() => setOpenMenu(!openMenu)}>
-                {userData?.fotoUrl ? (
-                <img src={userData.fotoUrl} alt="Perfil" className="user-photo" />
+                {userData?.photoURL ? (
+                <img src={userData.photoURL} alt="Perfil" className="user-photo" />
                 ) : (
                 <div className="user-avatar">👤</div>
                 )}
@@ -98,12 +98,12 @@ function VolunteerLayout({ children }) {
                     📋 Mis postulaciones
                 </Link>
 
-                <Link to="/history" onClick={() => setOpenSidebar(false)}>
-                    🕒 Historial
+                <Link to="/volunteer/support" onClick={() => setOpenSidebar(false)}>
+                    💬 Soporte y contacto
                 </Link>
 
-                <Link to="/profile" onClick={() => setOpenSidebar(false)}>
-                    👤 Mi perfil
+                <Link to="/volunteer/profile" onClick={() => setOpenSidebar(false)}>
+                    👤 Mi Perfil
                 </Link>
 
                 <button onClick={handleLogout} className="sidebar-logout">

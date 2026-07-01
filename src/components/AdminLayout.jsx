@@ -85,6 +85,9 @@ function AdminLayout({ children }) {
             <Link to="/admin/create-campaign" onClick={() => setOpenSidebar(false)}>➕ Crear campaña</Link>
             <Link to="/admin/applications" onClick={() => setOpenSidebar(false)}>📋 Postulaciones</Link>
             <Link to="/admin/participants" onClick={() => setOpenSidebar(false)}>👥 Participantes</Link>
+            <Link to="/admin/contact-requests" onClick={() => setOpenSidebar(false)}>
+                📩 Solicitudes
+            </Link>
 
             <button onClick={handleLogout} className="admin-sidebar-logout">
                 🚪 Cerrar sesión

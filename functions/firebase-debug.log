@@ -1,0 +1,78 @@
+[debug] [2026-07-01T02:54:50.366Z] ----------------------------------------------------------------------
+[debug] [2026-07-01T02:54:50.369Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\adria\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --only functions
+[debug] [2026-07-01T02:54:50.370Z] CLI Version:   15.22.3
+[debug] [2026-07-01T02:54:50.370Z] Platform:      win32
+[debug] [2026-07-01T02:54:50.370Z] Node Version:  v24.16.0
+[debug] [2026-07-01T02:54:50.370Z] Detected Agent: unknown
+[debug] [2026-07-01T02:54:50.370Z] Time:          Tue Jun 30 2026 21:54:50 GMT-0500 (hora estándar de Perú)
+[debug] [2026-07-01T02:54:50.370Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-07-01T02:54:52.797Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-07-01T02:54:52.797Z] > authorizing via signed-in user (adrianvasquezberrocal123@gmail.com)
+[debug] [2026-07-01T02:54:52.797Z] [iam] checking project voluntariado-web for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2026-07-01T02:54:52.799Z] Checked if tokens are valid: true, expires at: 1782875948151
+[debug] [2026-07-01T02:54:52.799Z] Checked if tokens are valid: true, expires at: 1782875948151
+[debug] [2026-07-01T02:54:52.800Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/voluntariado-web:testIamPermissions [none]
+[debug] [2026-07-01T02:54:52.800Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/voluntariado-web:testIamPermissions  x-goog-user-project=voluntariado-web
+[debug] [2026-07-01T02:54:52.800Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/voluntariado-web:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2026-07-01T02:54:53.777Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/voluntariado-web:testIamPermissions 200
+[debug] [2026-07-01T02:54:53.777Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/voluntariado-web:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2026-07-01T02:54:53.778Z] Checked if tokens are valid: true, expires at: 1782875948151
+[debug] [2026-07-01T02:54:53.778Z] Checked if tokens are valid: true, expires at: 1782875948151
+[debug] [2026-07-01T02:54:53.778Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/voluntariado-web/serviceAccounts/voluntariado-web@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2026-07-01T02:54:53.778Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/voluntariado-web/serviceAccounts/voluntariado-web@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2026-07-01T02:54:54.864Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/voluntariado-web/serviceAccounts/voluntariado-web@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2026-07-01T02:54:54.865Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/voluntariado-web/serviceAccounts/voluntariado-web@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[info] 
+[info] === Deploying to 'voluntariado-web'...
+[info] 
+[info] i  deploying functions 
+[debug] [2026-07-01T02:54:54.873Z] Checked if tokens are valid: true, expires at: 1782875948151
+[debug] [2026-07-01T02:54:54.873Z] Checked if tokens are valid: true, expires at: 1782875948151
+[debug] [2026-07-01T02:54:54.873Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/voluntariado-web [none]
+[debug] [2026-07-01T02:54:55.103Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/voluntariado-web 200
+[debug] [2026-07-01T02:54:55.103Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/voluntariado-web {"projectNumber":"198751278597","projectId":"voluntariado-web","lifecycleState":"ACTIVE","name":"Voluntariado-web","labels":{"firebase":"enabled","firebase-core":"disabled"},"createTime":"2026-06-11T03:16:45.908Z"}
+[info] i  functions: preparing codebase default for deployment 
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[info] i  artifactregistry: ensuring required API artifactregistry.googleapis.com is enabled... 
+[debug] [2026-07-01T02:54:55.106Z] Checked if tokens are valid: true, expires at: 1782875948151
+[debug] [2026-07-01T02:54:55.106Z] Checked if tokens are valid: true, expires at: 1782875948151
+[debug] [2026-07-01T02:54:55.106Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/voluntariado-web/adminSdkConfig [none]
+[debug] [2026-07-01T02:54:55.687Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/voluntariado-web/adminSdkConfig 200
+[debug] [2026-07-01T02:54:55.688Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/voluntariado-web/adminSdkConfig {"projectId":"voluntariado-web","storageBucket":"voluntariado-web.firebasestorage.app"}
+[debug] [2026-07-01T02:54:55.692Z] Validating nodejs source
+[debug] [2026-07-01T02:54:57.034Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "24"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^13.6.0",
+    "firebase-functions": "^7.0.0",
+    "nodemailer": "^9.0.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.15.0",
+    "eslint-config-google": "^0.14.0",
+    "firebase-functions-test": "^3.4.1"
+  },
+  "private": true
+}
+[debug] [2026-07-01T02:54:57.034Z] Building nodejs source
+[info] i  functions: Loading and analyzing source code for codebase default to determine what to deploy 
+[debug] [2026-07-01T02:54:57.035Z] Could not find functions.yaml. Must use http discovery
+[debug] [2026-07-01T02:54:57.043Z] Found firebase-functions binary at 'C:\Users\adria\voluntariado-web\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8341
+
+[debug] [2026-07-01T02:54:58.229Z] Got response from /__/functions.yaml {"endpoints":{"sendCampaignReminders":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","secretEnvironmentVariables":[{"key":"EMAIL_USER"},{"key":"EMAIL_PASS"}],"labels":{},"scheduleTrigger":{"schedule":"every day 08:00","retryConfig":{},"timeZone":"America/Lima"},"entryPoint":"sendCampaignReminders"},"testReminderNow":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","secretEnvironmentVariables":[{"key":"EMAIL_USER"},{"key":"EMAIL_PASS"}],"labels":{},"httpsTrigger":{},"entryPoint":"testReminderNow"}},"specVersion":"v1alpha1","requiredAPIs":[{"api":"cloudscheduler.googleapis.com","reason":"Needed for scheduled functions."}],"extensions":{},"params":[{"type":"secret","name":"EMAIL_USER"},{"type":"secret","name":"EMAIL_PASS"}]}

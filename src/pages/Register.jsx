@@ -88,12 +88,12 @@ function Register() {
       );
 
       const uid = userCredential.user.uid;
-      let fotoUrl = "";
+      let photoURL = "";
 
       if (foto) {
         const fotoRef = ref(storage, `users/${uid}/profile.jpg`);
         await uploadBytes(fotoRef, foto);
-        fotoUrl = await getDownloadURL(fotoRef);
+        photoURL = await getDownloadURL(fotoRef);
       }
 
       await setDoc(doc(db, "users", uid), {
@@ -105,7 +105,7 @@ function Register() {
         fechaNacimiento,
         disponibilidad,
         experiencia,
-        fotoUrl,
+        photoURL,
         rol: "voluntario",
         estado: "activo",
         createdAt: serverTimestamp(),

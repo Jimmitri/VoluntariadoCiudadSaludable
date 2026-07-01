@@ -424,7 +424,68 @@ a {
 .login-form input:focus {
   border-color: #2e7d32;
 }
+.forgot-password-link {
+  background: transparent;
+  border: none;
+  color: #2e7d32;
+  font-weight: 800;
+  cursor: pointer;
+  margin-top: 10px;
+  text-align: left;
+  padding: 0;
+}
 
+.forgot-password-link:hover {
+  color: #1b5e20;
+}
+
+.reset-password-modal {
+  width: 92%;
+  max-width: 430px;
+  background: white;
+  border-radius: 18px;
+  padding: 32px;
+  position: relative;
+}
+
+.reset-password-modal h2 {
+  color: #073b20;
+  margin-bottom: 10px;
+}
+
+.reset-password-modal p {
+  color: #526058;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 18px;
+}
+
+.reset-password-modal input {
+  width: 100%;
+  padding: 13px;
+  border: 1.5px solid #d4ded6;
+  border-radius: 10px;
+  margin-bottom: 14px;
+}
+
+.reset-password-modal button[type="submit"] {
+  width: 100%;
+  border: none;
+  background: #2e7d32;
+  color: white;
+  padding: 13px;
+  border-radius: 10px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.reset-message {
+  background: #f4f8f4;
+  padding: 12px;
+  border-radius: 10px;
+  color: #073b20 !important;
+  font-weight: 700;
+}
 /* Checkbox mostrar contraseña */
 .show-password-container {
   display: flex;
@@ -2263,7 +2324,90 @@ MODAL VOLUNTEER DETALLE
 }
 
 /*VOLUNTEER Y ADMIN CAMPAIGNS*/
+.campaign-delete-btn {
+  border: none;
+  background: #ffe6e6;
+  color: #b00020;
+  padding: 11px 16px;
+  border-radius: 10px;
+  font-weight: 900;
+  cursor: pointer;
+  margin-top: 10px;
+}
 
+.campaign-delete-btn:hover {
+  background: #ffd1d1;
+}
+
+.delete-campaign-modal {
+  width: 92%;
+  max-width: 460px;
+  background: white;
+  border-radius: 18px;
+  padding: 32px;
+  position: relative;
+}
+
+.delete-campaign-modal h2 {
+  color: #073b20;
+  margin-bottom: 12px;
+}
+
+.delete-campaign-modal p {
+  color: #526058;
+  margin-bottom: 12px;
+}
+
+.delete-campaign-modal strong {
+  display: block;
+  color: #102015;
+  font-size: 18px;
+  margin-bottom: 18px;
+}
+
+.delete-warning-box {
+  background: #fff7f7;
+  border-left: 4px solid #d32f2f;
+  padding: 14px;
+  border-radius: 10px;
+  color: #526058;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 18px;
+}
+
+.delete-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.confirm-delete-btn {
+  border: none;
+  background: #b00020;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.confirm-delete-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.campaign-card-footer{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:12px;
+}
+
+.campaign-delete-btn{
+    width:auto;
+    margin:0 auto;
+}
 /* Ajuste para campañas dentro de layouts privados */
 .volunteer-campaigns-wrapper,
 .admin-campaigns-wrapper {
@@ -2284,6 +2428,16 @@ MODAL VOLUNTEER DETALLE
 .volunteer-campaigns-wrapper .campaigns-content,
 .admin-campaigns-wrapper .campaigns-content {
   padding: 28px 28px 40px 28px;
+}
+
+.campaign-status-badge.active {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.campaign-status-badge.inactive {
+  background: #ffe6e6;
+  color: #b00020;
 }
 
 /* VOLUNTEER APPLICATIONS */
@@ -2362,6 +2516,9 @@ MODAL VOLUNTEER DETALLE
   font-weight: 900;
   text-transform: capitalize;
   white-space: nowrap;
+  justify-content:center;
+    align-items:center;
+    text-align:center;
 }
 
 .application-status.pendiente {
@@ -2984,5 +3141,431 @@ MODAL VOLUNTEER DETALLE
     min-height: auto;
     justify-content: center;
     align-items: center;
+  }
+}
+
+/* SUPPORT AND CONTACT */
+.support-panel {
+  background: white;
+  padding: 28px;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  margin-bottom: 24px;
+}
+
+.support-panel h2 {
+  color: #073b20;
+  margin-bottom: 18px;
+}
+
+.faq-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.faq-item {
+  background: #f8fbf8;
+  border: 1px solid #edf3ee;
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.faq-item h3 {
+  color: #073b20;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.faq-item p {
+  color: #526058;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.support-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.support-form label {
+  color: #102015;
+  font-weight: 800;
+}
+
+.support-form input,
+.support-form textarea {
+  width: 100%;
+  padding: 13px;
+  border: 1.5px solid #d4ded6;
+  border-radius: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  outline: none;
+}
+
+.support-form textarea {
+  min-height: 130px;
+  resize: vertical;
+}
+
+.support-form button {
+  border: none;
+  background: #2e7d32;
+  color: white;
+  padding: 13px;
+  border-radius: 10px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.whatsapp-panel p {
+  color: #526058;
+  margin-bottom: 16px;
+}
+
+.whatsapp-btn {
+  display: inline-block;
+  background: #188C47;
+  color: white;
+  text-decoration: none;
+  padding: 13px 18px;
+  border-radius: 10px;
+  font-weight: 900;
+}
+
+.whatsapp-btn.small {
+  text-align: center;
+  padding: 11px 14px;
+  font-size: 13px;
+}
+
+.contact-requests-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contact-request-card {
+  background: #f8fbf8;
+  border: 1px solid #edf3ee;
+  border-radius: 14px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 190px;
+  gap: 22px;
+}
+
+.contact-request-card h3 {
+  color: #073b20;
+  margin-bottom: 10px;
+}
+
+.contact-request-card p {
+  color: #526058;
+  font-size: 14px;
+  margin-bottom: 7px;
+  line-height: 1.5;
+}
+
+.contact-request-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.application-status.respondida {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+@media (max-width: 800px) {
+  .faq-list,
+  .contact-request-card {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/*VolunteerProfile*/
+
+.profile-card{
+    background:white;
+    border-radius:20px;
+    padding:35px;
+    margin-top:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.profile-photo-container{
+    display:flex;
+    justify-content:center;
+    margin-bottom:30px;
+}
+
+.profile-photo{
+    width:160px;
+    height:160px;
+    border-radius:50%;
+    object-fit:cover;
+    border:5px solid #2e7d32;
+}
+
+.profile-placeholder{
+    width:160px;
+    height:160px;
+    border-radius:50%;
+    background:#e8f5e9;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:70px;
+}
+
+.profile-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:20px;
+}
+
+.profile-field{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-bottom:18px;
+}
+
+.profile-field label{
+    font-weight:700;
+    color:#073b20;
+    margin-bottom:6px;
+    font-size:15px;
+}
+
+.profile-field input{
+    padding:12px;
+    border:1px solid #d8d8d8;
+    border-radius:10px;
+    background:#f8f8f8;
+}
+
+.profile-field select{
+    padding:12px;
+    border-radius:10px;
+    border:1px solid #d8d8d8;
+    background:#fff;
+}
+
+.profile-actions{
+    margin-top:35px;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    gap:15px;
+}
+
+.save-profile-btn{
+    background:#2e7d32;
+    color:white;
+    border:none;
+    padding:14px 28px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:700;
+    transition:.25s;
+}
+
+.save-profile-btn:hover{
+    background:#256428;
+}
+
+.profile-message{
+    color:#2e7d32;
+    font-weight:600;
+}
+
+.upload-photo-btn{
+    display:inline-block;
+    margin-top:15px;
+    background:#2e7d32;
+    color:white;
+    padding:10px 20px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:700;
+    transition:.3s;
+}
+
+.upload-photo-btn:hover{
+    background:#256428;
+}
+
+.profile-photo-container{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:35px;
+}
+
+.profile-photo{
+    width:170px;
+    height:170px;
+    border-radius:50%;
+    object-fit:cover;
+    border:5px solid #4F6F52;
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
+
+.profile-placeholder{
+    width:170px;
+    height:170px;
+    border-radius:50%;
+    background:#eef4ef;
+    border:4px solid #4F6F52;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:75px;
+    color:#4F6F52;
+}
+
+.upload-photo-btn{
+    margin-top:18px;
+    background:#4F6F52;
+    color:#fff;
+    padding:12px 24px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+}
+
+.upload-photo-btn:hover{
+    background:#3E5F44;
+}
+
+.profile-field input,
+.profile-field select{
+    padding:14px 16px;
+    min-height:50px;
+    border-radius:10px;
+    border:1px solid #d7d7d7;
+    background:#fff;
+    transition:.25s;
+    font-size:15px;
+}
+
+.profile-field input:focus,
+.profile-field select:focus{
+    outline:none;
+    border-color:#4F6F52;
+    box-shadow:0 0 0 3px rgba(79,111,82,.15);
+}
+
+.save-profile-btn{
+    background:#4F6F52;
+    color:#fff;
+    border:none;
+    padding:14px 30px;
+    border-radius:10px;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.save-profile-btn:hover{
+    background:#3E5F44;
+}
+
+.save-profile-btn:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+.profile-message{
+    width:100%;
+    padding:14px;
+    border-radius:10px;
+    background:#eef8ef;
+    color:#2f5e39;
+    text-align:center;
+    font-weight:600;
+}
+
+.change-password-card{
+  margin-top:55px;
+  padding-top:40px;
+  border-top:1px solid #ececec;
+}
+
+.change-password-card .save-profile-btn{
+    margin-top:10px;
+    min-width:220px;
+}
+
+.change-password-card h2{
+    color:#355E3B;
+    margin-bottom:25px;
+    font-size:24px;
+}
+
+
+@media (max-width:768px){
+
+    .profile-card{
+        padding:22px;
+    }
+
+    .profile-grid{
+        grid-template-columns:1fr;
+        gap:18px;
+    }
+
+    .profile-photo,
+    .profile-placeholder{
+        width:140px;
+        height:140px;
+    }
+
+    .profile-placeholder{
+        font-size:60px;
+    }
+
+    .profile-actions{
+        align-items:stretch;
+    }
+
+    .save-profile-btn{
+        width:100%;
+    }
+
+    .upload-photo-btn{
+        width:100%;
+        text-align:center;
+    }
+
+}
+
+@media (max-width:480px){
+
+    .profile-card{
+      padding:18px;
+      border-radius:15px;
+    }
+
+    .profile-field label{
+    font-size:14px;
+    }
+
+    .profile-field input,
+    .profile-field select{
+    font-size:14px;
+  }
+
+  .change-password-card h2{
+    font-size:20px;
   }
 }
