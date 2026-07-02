@@ -211,6 +211,19 @@ a {
     border-top-left-radius: 40%;
     border-bottom-left-radius: 40%;
 }
+.company-logo{
+    width: 55px;
+    height: 55px;
+    object-fit: contain;
+    margin-right: 15px;
+}
+
+.volunteer-logo{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
 
 /* RESPONSIVE */
 @media (max-width: 1000px) {

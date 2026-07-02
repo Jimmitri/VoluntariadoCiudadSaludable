@@ -366,6 +366,7 @@ function VolunteerProfile() {
                                 profile.photoURL
                             }
                             alt="Profile"
+                            loading="lazy"
                             className="profile-photo"
                         />
 

@@ -174,6 +174,7 @@ function VolunteerMyApplications() {
                     <img
                         src={selectedApplication.campaignImage}
                         alt={selectedApplication.campaignName}
+                        loading="lazy"
                         className="application-modal-image"
                     />
                     )}

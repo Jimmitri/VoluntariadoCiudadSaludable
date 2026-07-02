@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { signOut } from "firebase/auth";
+import { signOut, onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "../firebase/config";
+import logo from "../assets/images/logo.avif";
+import user from "../assets/images/user.png";
 
 function VolunteerLayout({ children }) {
     const navigate = useNavigate();
@@ -11,26 +13,40 @@ function VolunteerLayout({ children }) {
     const [openSidebar, setOpenSidebar] = useState(false);
 
     useEffect(() => {
-        const loadUser = async () => {
-        const user = auth.currentUser;
+        // Mostrar datos guardados inmediatamente
+        const cache = localStorage.getItem("userData");
 
-        if (!user) {
-            navigate("/login");
-            return;
+        if (cache) {
+            setUserData(JSON.parse(cache));
         }
 
-        const userRef = doc(db, "users", user.uid);
-        const userSnap = await getDoc(userRef);
+        // Verificar sesión y actualizar desde Firestore
+        const unsubscribe = onAuthStateChanged(auth, async (user) => {
+            if (!user) {
+                navigate("/login");
+                return;
+            }
 
-        if (userSnap.exists()) {
-            setUserData(userSnap.data());
-        }
-        };
+            try {
+                const userSnap = await getDoc(doc(db, "users", user.uid));
 
-        loadUser();
+                if (userSnap.exists()) {
+                    const data = userSnap.data();
+
+                    setUserData(data);
+
+                    localStorage.setItem("userData", JSON.stringify(data));
+                }
+            } catch (error) {
+                console.error("Error loading user:", error);
+            }
+        });
+
+        return () => unsubscribe();
     }, [navigate]);
 
     const handleLogout = async () => {
+        localStorage.removeItem("userData");
         await signOut(auth);
         navigate("/login");
     };
@@ -45,7 +61,12 @@ function VolunteerLayout({ children }) {
                 ☰
             </button>
             <Link to="/volunteer" className="volunteer-logo">
-            <span className="logo-icon">🌱</span>
+            <img
+                src={logo}
+                alt="Ciudad Saludable"
+                loading="lazy"
+                className="company-logo"
+            />
             <div>
                 <h2>Ciudad Saludable</h2>
                 <p>Juntos por un planeta mejor</p>
@@ -55,9 +76,15 @@ function VolunteerLayout({ children }) {
             <div className="user-menu">
             <button className="user-button" onClick={() => setOpenMenu(!openMenu)}>
                 {userData?.photoURL ? (
-                <img src={userData.photoURL} alt="Perfil" className="user-photo" />
+                <img src={userData.photoURL} 
+                alt="Perfil" 
+                loading="lazy"
+                className="user-photo" />
                 ) : (
-                <div className="user-avatar">👤</div>
+                <img src={user} 
+                alt="Perfil" 
+                loading="lazy"
+                className="user-photo"></img>
                 )}
 
                 <div>

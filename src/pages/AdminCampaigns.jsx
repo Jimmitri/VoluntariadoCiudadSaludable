@@ -298,7 +298,10 @@ function AdminCampaigns() {
                   <article key={camp.id} className="campaign-card">
                     {camp.imagen ? (
                       <div className="campaign-card-img">
-                        <img src={camp.imagen} alt={camp.nombre} />
+                        <img src={camp.imagen} 
+                        alt={camp.nombre}
+                        loading="lazy"
+                        />
                       </div>
                     ) : (
                       <div className="campaign-card-img campaign-card-img--placeholder">
@@ -381,7 +384,10 @@ function AdminCampaigns() {
 
                   <div className="edit-campaign-preview">
                     {editPreview ? (
-                      <img src={editPreview} alt="Vista previa" />
+                      <img src={editPreview} 
+                      alt="Vista previa"
+                      loading="lazy"
+                      />
                     ) : (
                       <div className="campaign-preview-placeholder">
                         <span>🌿</span>

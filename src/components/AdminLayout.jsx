@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { signOut } from "firebase/auth";
+import { signOut, onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "../firebase/config";
+import logo from "../assets/images/logo.avif";
+import user from "../assets/images/user.png";
+
 
 function AdminLayout({ children }) {
     const navigate = useNavigate();
@@ -11,26 +14,38 @@ function AdminLayout({ children }) {
     const [openSidebar, setOpenSidebar] = useState(false);
 
     useEffect(() => {
-        const loadAdmin = async () => {
-        const user = auth.currentUser;
+        const cache = localStorage.getItem("userData");
 
-        if (!user) {
-            navigate("/login");
-            return;
+        if (cache) {
+            setAdminData(JSON.parse(cache));
         }
 
-        const userRef = doc(db, "users", user.uid);
-        const userSnap = await getDoc(userRef);
+        const unsubscribe = onAuthStateChanged(auth, async (user) => {
+            if (!user) {
+                navigate("/login");
+                return;
+            }
 
-        if (userSnap.exists()) {
-            setAdminData(userSnap.data());
-        }
-        };
+            try {
+                const userSnap = await getDoc(doc(db, "users", user.uid));
 
-        loadAdmin();
+                if (userSnap.exists()) {
+                    const data = userSnap.data();
+
+                    setAdminData(data);
+
+                    localStorage.setItem("userData", JSON.stringify(data));
+                }
+            } catch (error) {
+                console.error("Error loading admin:", error);
+            }
+        });
+
+        return () => unsubscribe();
     }, [navigate]);
 
     const handleLogout = async () => {
+        localStorage.removeItem("userData");
         await signOut(auth);
         navigate("/login");
     };
@@ -43,7 +58,12 @@ function AdminLayout({ children }) {
             </button>
 
             <Link to="/admin" className="admin-logo">
-            <span className="logo-icon">🌱</span>
+            <img
+                src={logo}
+                alt="Ciudad Saludable"
+                loading="lazy"
+                className="company-logo"
+            />
             <div>
                 <h2>Ciudad Saludable</h2>
                 <p>Panel administrativo</p>
@@ -53,9 +73,15 @@ function AdminLayout({ children }) {
             <div className="admin-user-menu">
             <button className="admin-user-button" onClick={() => setOpenMenu(!openMenu)}>
                 {adminData?.fotoUrl ? (
-                <img src={adminData.fotoUrl} alt="Administrador" className="user-photo" />
+                <img src={adminData.fotoUrl} 
+                alt="Administrador"
+                loading="lazy"
+                className="user-photo" />
                 ) : (
-                <div className="user-avatar">👤</div>
+                <img src={user} 
+                alt="Perfil" 
+                loading="lazy"
+                className="user-photo"></img>
                 )}
 
                 <div>

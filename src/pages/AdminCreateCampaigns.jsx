@@ -163,7 +163,7 @@ function AdminCreateCampaigns() {
 
             <div className="campaign-image-preview">
                 {preview ? (
-                <img src={preview} alt="Vista previa campaña" />
+                <img src={preview} alt="Vista previa campaña" loading="lazy" />
                 ) : (
                 <div className="campaign-preview-placeholder">
                     <p>Vista previa de la imagen</p>

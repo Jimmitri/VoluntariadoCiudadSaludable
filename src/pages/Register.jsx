@@ -134,7 +134,7 @@ function Register() {
     <main className="register-page">
       <section className="register-container">
         <div className="register-image">
-          <img src={registerImage} alt="Voluntariado ambiental" />
+          <img src={registerImage} alt="Voluntariado ambiental" loading="lazy"/>
         </div>
 
         <div className="register-card">
@@ -222,7 +222,7 @@ function Register() {
                 <div className="photo-upload-box">
                   <div className="photo-preview">
                     {fotoPreview ? (
-                      <img src={fotoPreview} alt="Vista previa" />
+                      <img src={fotoPreview} alt="Vista previa" loading="lazy"/>
                     ) : (
                       <span>👤</span>
                     )}

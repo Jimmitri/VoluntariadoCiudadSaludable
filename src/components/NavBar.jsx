@@ -1,10 +1,16 @@
 import { Link } from "react-router-dom";
+import logo from "../assets/images/logo.avif";
 
 function NavBar() {
   return (
     <nav className="navbar">
       <Link to="/" className="logo">
-        <span className="logo-icon">🌱</span>
+        <img
+                src={logo}
+                alt="Ciudad Saludable"
+                loading="lazy"
+                className="company-logo"
+            />
         <div>
           <h2>Ciudad Saludable</h2>
           <p>Juntos por un planeta mejor</p>

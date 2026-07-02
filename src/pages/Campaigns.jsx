@@ -114,7 +114,7 @@ function Campaigns() {
                   {/* ── Imagen de la campaña ── */}
                   {camp.imagen ? (
                     <div className="campaign-card-img">
-                      <img src={camp.imagen} alt={camp.nombre} />
+                      <img src={camp.imagen} alt={camp.nombre} loading="lazy"/>
                     </div>
                   ) : (
                     <div className="campaign-card-img campaign-card-img--placeholder">
@@ -177,6 +177,7 @@ function Campaigns() {
               <img
                 src={selectedCampaign.imagen}
                 alt={selectedCampaign.nombre}
+                loading="lazy"
                 className="modal-image"
               />
             ) : (

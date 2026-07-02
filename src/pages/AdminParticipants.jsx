@@ -110,6 +110,7 @@ function AdminParticipants() {
                         "https://via.placeholder.com/300x160?text=Campaña"
                         }
                         alt={campaign.nombre}
+                        loading="lazy"
                     />
 
                     <div>

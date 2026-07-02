@@ -148,6 +148,7 @@ function AdminDashboard() {
                             "https://via.placeholder.com/120x80?text=Campaña"
                         }
                         alt={campaign.nombre}
+                        loading="lazy"
                         />
 
                         <div className="admin-campaign-info">

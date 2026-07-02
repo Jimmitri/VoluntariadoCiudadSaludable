@@ -57,7 +57,7 @@ function Home() {
         </div>
 
         <div className="hero-image">
-          <img src={heroImage} alt="Voluntarios ambientales" />
+          <img src={heroImage} alt="Voluntarios ambientales" loading="lazy"/>
         </div>
       </section>
     </main>

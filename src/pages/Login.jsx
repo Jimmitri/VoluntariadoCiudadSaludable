@@ -37,12 +37,14 @@ function Login() {
       const userRef = doc(db, "users", uid);
       const userSnap = await getDoc(userRef);
 
+
       if (!userSnap.exists()) {
         setError("El usuario no tiene datos registrados.");
         return;
       }
 
       const userData = userSnap.data();
+      localStorage.setItem("userData", JSON.stringify(userData));
 
       if (userData.rol === "administrador") {
         navigate("/admin");
@@ -94,7 +96,7 @@ function Login() {
     <main className="login-page">
       <section className="login-container">
         <div className="login-image">
-          <img src={loginImage} alt="Naturaleza" />
+          <img src={loginImage} alt="Naturaleza" loading="lazy"/>
         </div>
 
         <div className="login-card">
